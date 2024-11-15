@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Finance Tracker - Registration</title>
+</head>
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-5">
+  <h2 class="text-center">Login</h2>
+  <form action="/api/users/register" method="POST">
+    <div class="form-group">
+      <label for="username">Username</label>
+      <input type="text" class="form-control" id="username" name="username" placeholder="Enter username" required>
+    </div>
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" class="form-control" id="password" name="password" placeholder="Enter password" required>
+    </div>
+    <div class="form-group">
+      <label for="email">email</label>
+      <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" required>
+    </div>
+    <button type="submit" class="btn btn-primary btn-block">Register</button>
+  </form>
+<script>
+  // Add event listener to the form
+  const form = document.getElementById('registerForm');
+
+  form.addEventListener('submit', function(event) {
+    // Prevent default form submission (so it doesn't reload the page)
+    event.preventDefault();
+
+    // Get form data
+    const formData = {
+      username: document.getElementById('username').value,
+      email: document.getElementById('email').value,
+      password: document.getElementById('password').value
+    };
+
+    // Example using fetch to submit form data to the backend (adjust the URL as needed)
+    fetch('/api/users/register', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(formData)
+    })
+            .then(response => response.json())
+            .then(data => {
+              console.log('User registered:', data);
+            })
+            .catch(error => {
+              console.error('Error:', error);
+            });
+  });
+</script>
+</body>
+</html>
+
